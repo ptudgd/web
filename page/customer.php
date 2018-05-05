@@ -63,7 +63,7 @@
 										<td class="text-center"><?=$value["CustomerName"]?></td>
 										<td class="text-center"><?=$value["Phone"]?></td>
 										<td class="text-center"><?=$value["Email"]?></td>
-										<td class="text-center"><button class="btn btn-default" onclick="btnEditClick(<?=$value['CustomerId']?>);return false;"><i class="fa fa-edit"></i></button> <button class="btn btn-default"><i class="fa fa-trash-o"></i></button></td>
+										<td class="text-center"><button class="btn btn-default" onclick="btnEditClick(<?=$value['CustomerId']?>);return false;"><i class="fa fa-edit"></i></button> <button class="btn btn-default" onclick="ExecuteDelete(<?=$value['CustomerId']?>);"><i class="fa fa-trash-o"></i></button></td>
 									</tr>
 									<div id="myModal_<?=$value['CustomerId']?>" class="modal fade" role="dialog">
 										<div class="modal-dialog">
@@ -104,5 +104,17 @@
 <script>
 	function btnEditClick(id) {
 		$("#myModal_"+id).modal();
+	}
+	function ExecuteDelete(id) {
+		$.post(
+			'/api/Customer/CustomerExecuteDelete.php', 
+			{
+				CustomerId : id
+			},
+			function(result) {
+				console.log(result);
+				result = JSON.parse(result);
+				noti(result.Message,'success');
+			});
 	}
 </script>

@@ -56,7 +56,7 @@
 										<td class="text-center"><?=$value["Phone"]?></td>
 										<td class="text-center"><?=$value["Email"]?></td>
 										<td class="text-center"><?=$value["Address"]?></td>
-										<td class="text-center"><button onclick="btnEditClick(<?=$value["EmployeeId"]?>);return false;" class="btn btn-default"><i class="fa fa-edit"></i></button> <button class="btn btn-default"><i class="fa fa-trash-o"></i></button></td>
+										<td class="text-center"><button onclick="btnEditClick(<?=$value["EmployeeId"]?>);return false;" class="btn btn-default"><i class="fa fa-edit"></i></button> <button class="btn btn-default" onclick="ExecteDelete(<?=$value['EmployeeId']?>);"><i class="fa fa-trash-o"></i></button></td>
 									</tr>
 									
 
@@ -70,11 +70,11 @@
 													<h4 class="modal-title">Chỉnh sửa nhân viên</h4>
 												</div>
 												<div class="modal-body">
-													<input type="hidden" id="EmployeeId" value="<?=$value['EmployeeId']?>"><div class="form-group"> <label>Tên</label> <input type="text" class="form-control" id="EmpployeeName" placeholder="Nhập tên nhân viên" value="<?=$value['EmployeeName']?>"> </div><div class="form-group"> <label>Điện thoại</label> <input type="text" class="form-control" id="Phone" placeholder="Nhập số điện thoại" value="<?=$value['Phone']?>"> </div><div class="form-group"> <label>Email</label> <input type="text" class="form-control" id="Phone" placeholder="Nhập Email" value="<?=$value['Email']?>"> </div><div class="form-group"> <label>Địa chỉ</label> <input type="text" class="form-control" id="Address" placeholder="Nhập địa chỉ" value="<?=$value['Address']?>"> </div>
+													<input type="hidden" id="EmployeeId_<?=$value['EmployeeId']?>" value="<?=$value['EmployeeId']?>"><div class="form-group"> <label>Tên</label> <input type="text" class="form-control" id="EmployeeName_<?=$value['EmployeeId']?>" placeholder="Nhập tên nhân viên" value="<?=$value['EmployeeName']?>"> </div><div class="form-group"> <label>Điện thoại</label> <input type="text" class="form-control" id="Phone_<?=$value['EmployeeId']?>" placeholder="Nhập số điện thoại" value="<?=$value['Phone']?>"> </div><div class="form-group"> <label>Email</label> <input type="text" class="form-control" id="Email_<?=$value['EmployeeId']?>" placeholder="Nhập Email" value="<?=$value['Email']?>"> </div><div class="form-group"> <label>Địa chỉ</label> <input type="text" class="form-control" id="Address_<?=$value['EmployeeId']?>" placeholder="Nhập địa chỉ" value="<?=$value['Address']?>"> </div>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+													<button type="button" class="btn btn-success" onclick="ExecuteSave(<?=$value['EmployeeId']?>);return false;" data-dismiss="modal">Save</button>
 												</div>
 											</div>
 
@@ -100,7 +100,32 @@
 	function btnEditClick(id) {
 		$("#myModal_"+id).modal();
 	}
-	function SaleExecuteSave() {
-		// body...
+	function ExecuteSave(id) {
+		$.post(
+			'/api/Employee/EmployeeExecuteSave.php', 
+			{
+				EmployeeId : $("#EmployeeId_"+id).val(),
+				EmployeeName : $("#EmployeeName_"+id).val(),
+				Phone : $("#Phone_"+id).val(),
+				Email : $("#Email_"+id).val(),
+				Address : $("#Address_"+id).val()
+			},
+			function(result) {
+				result = JSON.parse(result);
+				noti(result.Message,'success');
+			});
+	}
+	function ExecteDelete(id) {
+		debugger;
+		$.post(
+			'/api/Employee/EmployeeExecuteDelete.php', 
+			{
+				EmployeeId : id
+			},
+			function(result) {
+				console.log(result);
+				result = JSON.parse(result);
+				noti(result.Message,'success');
+			});
 	}
 </script>

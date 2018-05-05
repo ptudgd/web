@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -14,8 +15,11 @@
 	<!--base css styles-->
 	<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 	<!--page specific css styles-->
+	<link rel="stylesheet" type="text/css" href="../assets/noti/css/alertify.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/noti/css/alertify.rtl.min.css">
 
 	<!--flaty css styles-->
 	<link rel="stylesheet" href="../css/flaty.css">
@@ -33,12 +37,12 @@
 			<hr/>
 			<div class="form-group">
 				<div class="controls">
-					<input type="text" placeholder="Username" class="form-control" />
+					<input type="text" placeholder="Username" id="username" class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="controls">
-					<input type="password" placeholder="Password" class="form-control" />
+					<input type="password" placeholder="Password" id="password" class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -50,7 +54,7 @@
 			</div>
 			<div class="form-group">
 				<div class="controls">
-					<button type="submit" class="btn btn-primary form-control">Sign In</button>
+					<button type="button" onclick="CheckLogin(); return false;" class="btn btn-primary form-control">Sign In</button>
 				</div>
 			</div>
 			<hr/>
@@ -65,7 +69,8 @@
 
 
 	<!--basic scripts-->
-	<script src="../../ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../assets/noti/notify.min.js"></script>
+
 	<script>window.jQuery || document.write('<script src="assets/jquery/jquery-2.1.1.min.js"><\/script>')</script>
 	<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 
@@ -87,6 +92,31 @@
 				goToForm('register');
 			});
 		});
+		function CheckLogin() {
+			var username = $("#username").val();
+			var password = $("#password").val();
+			if(!username || !password){
+				noti("Vui lòng không bỏ trống!","error");
+				return;
+			}
+			$.post('../api/Login/CheckLogin.php', {username: username,password:password}, function(result) {
+				result =result.substring(57);
+
+				result = JSON.parse(result);
+				noti(result.Message,'success');
+				if(result.Message = 'Thành công!')
+					window.location.href = '/';
+			});
+		}
+	</script>
+	<script>
+		function noti(text,type) {
+			$.notify(text, {
+				className: type,
+				position: 'bottom right' 
+			});
+		}
+
 	</script>
 </body>
 

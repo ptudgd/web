@@ -7,9 +7,9 @@
 		
 		function __construct()
 		{
-			// if(!isset($_SESSION)){}
-			// 	//echo "<script>window.location.href = '/page/login.php'</script>";
-			// }
+			 if(!isset($_SESSION['username'])){
+				//echo "<script>window.location.href = '/page/login.php'</script>";
+			}
 		}
 	}
 

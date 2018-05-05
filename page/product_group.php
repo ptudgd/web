@@ -47,6 +47,7 @@
 							<thead>
 								<tr>
 									<th class="text-center"">Mã</th>
+									<th class="text-center"">Tên</th>
 									<th class="text-center">Ghi chú</th>
 									<th class="text-center">Tác vụ</th>
 								</tr>

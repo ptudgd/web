@@ -1,6 +1,6 @@
 <?php include "InfoPage.php";
-    session_start();
- ?>
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <!-- Mirrored from shamsoft.net/flaty/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Sep 2015 07:23:28 GMT -->
@@ -478,7 +478,17 @@
 <script src="js/flaty-demo-codes.js"></script>
 <script src="assets/myJavascript.js"></script>
 <script src="assets/moment/js/moment.min.js"></script>
-
+<script>
+    function noti(text,type) {
+        $.notify(text, {
+          className: type,
+          position: 'bottom right' 
+      });
+    }
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+  }
+</script>
 </body>
 <!-- Mirrored from shamsoft.net/flaty/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Sep 2015 07:24:12 GMT -->
 

@@ -19,7 +19,7 @@ class Connection extends Base
 		return $this->con->query($sql);
 	}
 
-	public function Success($data,$Message = null)
+	public function Success($data= [],$Message = null)
 	{
 		$ar = array();
 		foreach ($data as $value) {
