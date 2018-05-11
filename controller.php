@@ -7,6 +7,9 @@
 		case '':
 			include './page/home.php';
 			break;
+		case 'Home':
+			include './page/home.php';
+			break;
 		case 'Sale':
 			include './page/sale.php';
 			break;

@@ -79,34 +79,54 @@
 													<h4 class="modal-title">Chỉnh sửa nhân viên</h4>
 												</div>
 												<div class="modal-body">
-													<input type="hidden" id="CustomerId" value="<?=$value['ProductId']?>"><div class="form-group"> <label>Mã</label> <input type="text" class="form-control" id="ProductId" placeholder="Nhập mã sản phẩm" value="<?=$value['ProductId']?>"> </div><div class="form-group"> <label>Mã vạch</label> <input type="text" class="form-control" id="Barcode" placeholder="Nhập mã vạch" value="<?=$value['Barcode']?>"> </div><div class="form-group"> <label>Tên</label> <input type="text" class="form-control" id="ProductName" placeholder="Nhập tên sản phẩm" value="<?=$value['ProductName']?>"> </div><div class="form-group"> <label>Nhóm</label> <input type="text" class="form-control" id="ProductGroupId" placeholder="Nhập mã nhóm sản phẩm" value="<?=$value['ProductGroupId']?>"> </div><div class="form-group"> <label>Bảo hành</label> <input type="text" class="form-control" id="Quantity" placeholder="Nhập ngày bảo hành" value="<?=$value['Quantity']?>"> </div><div class="form-group"> <label>Ghi chú</label> <input type="text" class="form-control" id="Note" placeholder="Ghi chú" value="<?=$value['Note']?>"> </div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-												</div>
-											</div>
+													<input type="hidden" id="CustomerId" value="<?=$value['ProductId']?>">
+													<div class="form-group"> 
+														<label>Mã</label> 
+														<input type="text" class="form-control" id="ProductId" placeholder="Nhập mã sản phẩm" value="<?=$value['ProductId']?>">
+													</div>
+													<div class="form-group">
+														<label>Mã vạch</label> 
+														<input type="text" class="form-control" id="Barcode" placeholder="Nhập mã vạch" value="<?=$value['Barcode']?>"> 
+													</div>
+													<div class="form-group"> 
+														<label>Tên</label>
+														<input type="text" class="form-control" id="ProductName" placeholder="Nhập tên sản phẩm" value="<?=$value['ProductName']?>"> </div>
+														<div class="form-group"> 
+															<label>Nhóm</label> 
+															<input type="text" class="form-control" id="ProductGroupId" placeholder="Nhập mã nhóm sản phẩm" value="<?=$value['ProductGroupId']?>">
+														</div>
+														<div class="form-group"> 
+															<label>Bảo hành</label> <input type="text" class="form-control" id="Quantity" placeholder="Nhập ngày bảo hành" value="<?=$value['Quantity']?>"> </div>
+															<div class="form-group"> 
+																<label>Ghi chú</label> 
+																<input type="text" class="form-control" id="Note" placeholder="Ghi chú" value="<?=$value['Note']?>"> </div>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+															</div>
+														</div>
 
-										</div>
-									</div>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
+													</div>
+												</div>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
+				<!-- END Main Content -->
+
+				<footer>
+					<p>2013 © FLATY Admin Template.</p>
+				</footer>
+
+				<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i class="fa fa-chevron-up"></i></a>
 			</div>
-		</div>
-	</div>
-	<!-- END Main Content -->
-
-	<footer>
-		<p>2013 © FLATY Admin Template.</p>
-	</footer>
-
-	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i class="fa fa-chevron-up"></i></a>
-</div>
-<script>
-	function btnEditClick(id) {
-		$("#myModal_"+id).modal();
-	}
-</script>
+			<script>
+				function btnEditClick(id) {
+					$("#myModal_"+id).modal();
+				}
+			</script>

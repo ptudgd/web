@@ -63,28 +63,36 @@
 										<td class="text-center"><?=$value["CustomerName"]?></td>
 										<td class="text-center"><?=$value["Phone"]?></td>
 										<td class="text-center"><?=$value["Email"]?></td>
-										<td class="text-center"><button class="btn btn-default" onclick="btnEditClick(<?=$value['CustomerId']?>);return false;"><i class="fa fa-edit"></i></button> <button class="btn btn-default" onclick="ExecuteDelete(<?=$value['CustomerId']?>);><i class="fa fa-trash-o"></i></button></td>
+										<td class="text-center"><button class="btn btn-default" onclick="btnEditClick(<?=$value['CustomerId']?>);return false;"><i class="fa fa-edit"></i></button> <button class="btn btn-default" onclick="ExecuteDelete(<?=$value['CustomerId']?>);"><i class="fa fa-trash-o"></i></button></td>
 									</tr>
-									<div id="myModal_<?=$value['CustomerId']?>" class="modal fade" role="dialog">
-										<div class="modal-dialog">
+									<form>
+										<div id="myModal_<?=$value['CustomerId']?>" class="modal fade" role="dialog">
+											<div class="modal-dialog">
 
-											<!-- Modal content-->
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Chỉnh sửa nhân viên</h4>
+												<!-- Modal content-->
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title">Chỉnh sửa nhân viên</h4>
+													</div>
+													<form class="execute-form-<?=$value['CustomerId']?>">
+														<div class="modal-body">
+														<input type="hidden" id="CustomerId" value="<?=$value['CustomerId']?>"><div class="form-group"> <label>Tên</label> <input type="text" class="form-control" id="EmpployeeName" placeholder="Nhập tên nhà cung cấp" value="<?=$value['CustomerName']?>"> </div><div class="form-group"> <label>Điện thoại</label> <input type="text" class="form-control" id="Phone" placeholder="Nhập số điện thoại" value="<?=$value['Phone']?>"> </div><div class="form-group"> <label>Email</label> <input type="text" class="form-control" id="Phone" placeholder="Nhập Email" value="<?=$value['Email']?>"> </div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+														<button type="button" onclick="btnSave(<?=$value['CustomerId']?>);return false;" class="btn btn-success" data-dismiss="modal">Save</button>
+													</div>
+													</form>
+													
+
 												</div>
-												<div class="modal-body">
-													<input type="hidden" id="CustomerId" value="<?=$value['CustomerId']?>"><div class="form-group"> <label>Tên</label> <input type="text" class="form-control" id="EmpployeeName" placeholder="Nhập tên nhà cung cấp" value="<?=$value['CustomerName']?>"> </div><div class="form-group"> <label>Điện thoại</label> <input type="text" class="form-control" id="Phone" placeholder="Nhập số điện thoại" value="<?=$value['Phone']?>"> </div><div class="form-group"> <label>Email</label> <input type="text" class="form-control" id="Phone" placeholder="Nhập Email" value="<?=$value['Email']?>"> </div>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-												</div>
+
+
 											</div>
-
 										</div>
-									</div>
+									</form>
+									
 								<?php endforeach; ?>
 							</tbody>
 						</table>
@@ -103,7 +111,19 @@
 </div>
 <script>
 	function btnEditClick(id) {
-		$("#myModal_"+id).modal();
+		window.open("/page/VenderInput.php?CustomerId="+id, "_blank", "top=0,left=500,width=600,height=700");
+	}
+	function btnSave(id) {
+		$.ajax({
+			url: '/api/Vender/VenderInput.php',
+			type: 'POST',
+			data: $("myModal_"+id).serialize(),
+			success: function(data) {
+				debugger;
+			}
+		})
+		
+		
 	}
 	function ExecuteDelete(id) {
 		$.post(
